@@ -1,18 +1,20 @@
 import shortid from 'shortid';
-import types from './contacts-types';
-
-const formSubmitHandler = (name, number) => ({
-    type: types.ADD,
-    payload: { id: shortid.generate(), name, number }
-});
-
-
-const onDeleteContact = contactId => ({
-    type: types.DELETE,
-    payload: contactId,
-});
+import { createAction } from '@reduxjs/toolkit';
 
 
 
 
-export default { formSubmitHandler, onDeleteContact };
+const formSubmitHandler = createAction('contacts/add', (name, number) => ({
+        payload: { id: shortid.generate(), name, number },
+
+}));
+
+
+const onDeleteContact = createAction('contacts/delete');
+const onChangeFilter = createAction('contacts/changeFilter');
+
+
+
+export default { formSubmitHandler, onDeleteContact, onChangeFilter };
+
+
